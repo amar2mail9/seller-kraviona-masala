@@ -4,9 +4,10 @@ import { IoNotifications } from "react-icons/io5";
 import { AiFillDashboard, AiFillProduct } from "react-icons/ai";
 import { MdEmail, MdGroup, MdPermMedia } from "react-icons/md";
 import { FaDelicious } from "react-icons/fa6";
-import { SiGoogleanalytics, SiMarketo } from "react-icons/si";
+import { SiMarketo } from "react-icons/si";
 import { IoMdSettings } from "react-icons/io";
 import Cookies from "js-cookie";
+import { TbCategoryFilled } from "react-icons/tb";
 
 function Layout({ children }) {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ function Layout({ children }) {
     { name: "Products", link: "/products", icon: <AiFillProduct className="w-6 h-6" /> },
     { name: "Orders", link: "/orders", icon: <FaDelicious className="w-6 h-6" /> },
     { name: "Customers", link: "/customers", icon: <MdGroup className="w-6 h-6" /> },
-    { name: "Analytics", link: "/analytics", icon: <SiGoogleanalytics className="w-6 h-6" /> },
+    { name: "Category", link: "/categories", icon: <TbCategoryFilled className="w-6 h-6" /> },
     { name: "Marketing", link: "/marketing", icon: <SiMarketo className="w-6 h-6" /> },
     { name: "Media", link: "/medias", icon: <MdPermMedia className="w-6 h-6" /> },
     { name: "Settings", link: "/settings", icon: <IoMdSettings className="w-6 h-6" /> },

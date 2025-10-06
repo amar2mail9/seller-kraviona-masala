@@ -4,7 +4,11 @@ import DashBoard from "./components/DashBoard/DashBoard";
 import Layout from "./components/Layout";
 import Email from "./components/Email/Email";
 import Login from "./components/auth/Login";
-import ViewAllProduct from "./components/Product/ViewAllProduct";
+
+import ProductTable from "./components/Product/ProductTable";
+import ViewCategory from "./components/Category/ViewCategory";
+import AddCategory from "./components/Category/AddCategory";
+import AddProduct from "./components/Product/AddProduct";
 
 // ✅ Private route (only for logged-in users)
 const PrivateRoute = ({ children }) => {
@@ -54,7 +58,32 @@ function App() {
           path="/products"
           element={
             <PrivateRoute>
-              <ViewAllProduct />
+              <ProductTable />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/categories"
+          element={
+            <PrivateRoute>
+              <ViewCategory />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/add-category"
+          element={
+            <PrivateRoute>
+              <AddCategory />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/add-product"
+          element={
+            <PrivateRoute>
+              <AddProduct />
             </PrivateRoute>
           }
         />
