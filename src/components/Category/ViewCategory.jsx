@@ -29,6 +29,27 @@ const ViewCategory = () => {
     }
   };
 
+  const deleteCategory = async (categoryId) => {
+    if (!window.confirm("Are you sure you want to delete this category?")) return;
+
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URI}/category/${categoryId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem("token")}`
+        }
+      });
+      if (!res.ok) throw new Error("Failed to delete category");
+      const data = await res.json();
+      console.log(data);
+      // Refresh categories after deletion
+      fetchCategories();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -114,6 +135,7 @@ const ViewCategory = () => {
                         <FaEdit />
                       </button>
                       <button
+                        onClick={() => deleteCategory(category._id)}
                         title="Delete Category"
                         className="p-2 rounded-md bg-red-600 hover:bg-red-700 text-white transition"
                       >

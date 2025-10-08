@@ -9,6 +9,8 @@ import ProductTable from "./components/Product/ProductTable";
 import ViewCategory from "./components/Category/ViewCategory";
 import AddCategory from "./components/Category/AddCategory";
 import AddProduct from "./components/Product/AddProduct";
+import ProductDetails from "./components/Product/ProductDetails";
+import EditProduct from "./components/Product/EditProduct";
 
 // ✅ Private route (only for logged-in users)
 const PrivateRoute = ({ children }) => {
@@ -80,10 +82,26 @@ function App() {
           }
         />
         <Route
+          path="/edit-product/:id"
+          element={
+            <PrivateRoute>
+              <EditProduct />
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="/add-product"
           element={
             <PrivateRoute>
               <AddProduct />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/product/:slug"
+          element={
+            <PrivateRoute>
+              <ProductDetails />
             </PrivateRoute>
           }
         />

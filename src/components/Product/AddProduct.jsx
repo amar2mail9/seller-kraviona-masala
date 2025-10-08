@@ -18,7 +18,7 @@ const AddProduct = () => {
     const [status, setStatus] = useState('in stock');
     const [category, setCategory] = useState('');
 
-    const [isPublished, setIsPublished] = useState(false);
+    const [isPublished, setIsPublished] = useState(true);
     const navigate = useNavigate();
 
     // Fetch categories for select
@@ -84,7 +84,7 @@ const AddProduct = () => {
                 toast.success(data.message);
                 navigate('/products');
                 // Reset form
-                setTitle('');
+                setTitle('');f
                 setDescription('');
                 setThumbnail('');
                 setImages([]);

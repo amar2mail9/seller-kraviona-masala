@@ -45,8 +45,9 @@ function Layout({ children }) {
       {/* Sidebar */}
       <aside className="w-[20%] h-full flex flex-col border-r-2 border-gray-700">
         <h1 className="text-3xl flex items-center justify-center h-[10%] border-b-2 border-gray-700 text-gray-300 uppercase font-bold">
-          Kra<span className="text-blue-400">viona</span>
+          D<span className="text-orange-400">S</span>
         </h1>
+        
 
         <nav className="flex-1 overflow-y-auto">
           {menuList.map((menu, index) => {

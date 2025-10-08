@@ -31,6 +31,32 @@ function ProductTable() {
     }
   };
 
+  const deleteProduct = async (productId) => {
+    if (!window.confirm("Are you sure you want to delete this product?")) return;
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URI}/product/${productId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      });
+
+      if (!response.ok) throw new Error("Network error");
+      const data = await response.json();
+
+      if (!data.success) throw new Error(data.message || "Failed to delete product");
+
+      // Remove deleted product from state
+      setProducts((prevProducts) => prevProducts.filter((p) => p._id !== productId));
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      alert("Failed to delete product: " + error.message);
+    }
+  };
+
+
   React.useEffect(() => {
     fetchProducts();
   }, []);
@@ -133,19 +159,23 @@ function ProductTable() {
 
                     {/* Actions */}
                     <td className="px-5 py-3 flex justify-center gap-2 whitespace-nowrap">
+                      <Link to={`/product/${product.slug}`} rel="noreferrer">
+                        <button
+                          title="View Product"
+                          className="p-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white transition"
+                        >
+                          <FaEye />
+                        </button></Link>
+                      <Link to={`/edit-product/${product._id}`} rel="noreferrer">
+                        <button
+                          title="Edit Product"
+                          className="p-2 rounded-md bg-green-600 hover:bg-green-700 text-white transition"
+                        >
+                          <FaEdit />
+                        </button>
+                      </Link>
                       <button
-                        title="View Product"
-                        className="p-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white transition"
-                      >
-                        <FaEye />
-                      </button>
-                      <button
-                        title="Edit Product"
-                        className="p-2 rounded-md bg-yellow-500 hover:bg-yellow-600 text-white transition"
-                      >
-                        <FaEdit />
-                      </button>
-                      <button
+                        onClick={() => deleteProduct(product._id)}
                         title="Delete Product"
                         className="p-2 rounded-md bg-red-600 hover:bg-red-700 text-white transition"
                       >
